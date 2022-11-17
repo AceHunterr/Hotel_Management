@@ -1,0 +1,8 @@
+1. Create 6 categories of room.
+2. Create room details text file.
+3. Create a LoadDetails that converts the text file into the list.
+4. Enter the details by User.
+5. Create CheckAvailability(roomData,category,numberOfGuests).Return true if available else false.
+6. Create CalculatePrice(roomData,durationOfStay,roomIndex). Return calculated price.
+7. Create CreateSummary(roomData) . Return summary list of "Category Name | Number of Rooms occupied"
+8. Create UpdateTextFile. Update the text file with the new data.
