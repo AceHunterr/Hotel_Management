@@ -1,59 +1,9 @@
-from data import LoadDetails,enhance_room_details
+from data import LoadDetails,enhance_room_details,UpdateTextFile
 from manager import CheckAvailability,CalculatePrice,CreateSummary,UpdateData
 
-roomData = LoadDetails('room_details.txt')
+file = 'room_details.txt'
+roomData = LoadDetails(file)
 quit = False
-
-# def CheckOut():
-#     category = int(input("""
-#         Enter 1 for Wonderful,
-#         Enter 2 for Marvelous,
-#         Enter 3 for Spectcular,
-#         Enter 4 for Fantastic,
-#         Enter 5 for Fabulous,
-#         Enter 6 for Wow,
-
-#         Your Choice> """))
-
-#     numberOfGuests = int(input("""
-#         How many guests present? > """))
-    
-#     room_details = roomData[category]
-#     room_details = enhance_room_details(room_details)
-
-#     print(roomData)
-#     print(room_details)
-#     UpdateData(room_details,numberOfGuests,category,roomData,id=2)
-#     print(roomData)
-
-# def MakeReservation():
-#     category = int(input("""
-#         Enter 1 for Wonderful,
-#         Enter 2 for Marvelous,
-#         Enter 3 for Spectcular,
-#         Enter 4 for Fantastic,
-#         Enter 5 for Fabulous,
-#         Enter 6 for Wow,
-
-#         Your Choice> """))
-
-#     numberOfGuests = int(input("""
-#         How many guests will stay in the room? > """))
-
-#     durationOfStay = int(input("""
-#         How many nights would you like to stay in for? > 
-#     """))
-
-#     is_available = CheckAvailability(roomData,category,numberOfGuests)
-#     if is_available:
-#         print(CalculatePrice(roomData,durationOfStay,category))
-
-#     room_details = roomData[category]
-#     room_details = enhance_room_details(room_details)
-
-#     print(roomData)
-#     UpdateData(room_details,numberOfGuests,category,roomData,id=1)
-#     print(roomData)
 
 def CheckService(id):
 
@@ -68,7 +18,7 @@ def CheckService(id):
     Your Choice> """))
 
     numberOfGuests = int(input("""
-        How many guests present? > """))
+    How many guests present? > """))
     
     room_details = roomData[category]
     room_details = enhance_room_details(room_details)
@@ -78,19 +28,19 @@ def CheckService(id):
         is_available = CheckAvailability(roomData,category,numberOfGuests)
         if is_available:
             durationOfStay = int(input("""
-    How many nights would you like to stay in for? > 
-            """))
-            print(CalculatePrice(roomData,durationOfStay,category,numberOfGuests))
+    How many nights would you like to stay in for? > """))
+            price = CalculatePrice(roomData,durationOfStay,category,numberOfGuests) 
+            print(f"\nYour Total Price for the rooms would be: {price}\n")
         else:
-            print("!!!Sorry , Currently we are out of vacancies for the entered room!!!")
-    print(roomData)
+            print("\n!!!Sorry , Currently we are out of vacancies for the entered room!!!\n")
+    
     UpdateData(room_details,numberOfGuests,category,roomData,id=id)
-    print(roomData)
+    CreateSummary(roomData)
 
 
 # while not quit:
 
-service = input("Enter 1 to make a new Reservation, 2 to Check out or 'q' to quit: ")
+service = input("Enter 1 to make a new Reservation, 2 to Check out or 'q' to quit , 's' to see rooms available : ")
 
 if service == "1":
     CheckService(id=1)
@@ -98,7 +48,9 @@ elif service == "2":
     CheckService(id=2)
 elif service == 'q' or service == "quit":
     pass
+elif service == 's':
+    CreateSummary(roomData)
+else:
+    print("\n!!! Invalid Input !!! Try Again !!!\n")
 
-CreateSummary(roomData)
-# print(roomData)
-# print(roomData)
+UpdateTextFile(roomData,file)

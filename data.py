@@ -11,3 +11,9 @@ def enhance_room_details(list):
 
 def to_string_room_details(list):
     return [str(item) for item in list]
+
+def UpdateTextFile(roomData,file):
+    with open(file, 'w', encoding='UTF8', newline='') as f:
+        writer = csv.writer(f)
+        for row in roomData:
+            writer.writerow(row)
