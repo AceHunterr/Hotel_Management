@@ -1,56 +1,54 @@
-from data import LoadDetails,enhance_room_details,UpdateTextFile
-from manager import CheckAvailability,CalculatePrice,CreateSummary,UpdateData
+from data import LoadDetails,UpdateTextFile
+from manager import CreateSummary,CheckService
+import art
 
 file = 'room_details.txt'
 roomData = LoadDetails(file)
 quit = False
+stars = "***********************"
+hash = "#######################"
 
-def CheckService(id):
+art.tprint("FANCY   HOTEL")
+print("\nWelcome to Fancy Hotel... Please select from the following services\n")
 
-    category = int(input("""
-    Enter 1 for Wonderful,
-    Enter 2 for Marvelous,
-    Enter 3 for Spectcular,
-    Enter 4 for Fantastic,
-    Enter 5 for Fabulous,
-    Enter 6 for Wow,
+while not quit:
+    # While user want to keeps entering data the process goes on
 
-    Your Choice> """))
-
-    numberOfGuests = int(input("""
-    How many guests present? > """))
+    service = input("\nEnter 1 to make a new Reservation, 2 to Check out or 'q' to quit , 's' to see rooms available : ").lower()
     
-    room_details = roomData[category]
-    room_details = enhance_room_details(room_details)
+    if service == "1":
+        # Creating NEW RESERVATION 
 
-    if id==1:
+        print(f"\n{stars}\nLets Begin the Registration Process\n{stars}\n")
+        CheckService(roomData,id=1)
+        print(f"\n{stars}\n")
 
-        is_available = CheckAvailability(roomData,category,numberOfGuests)
-        if is_available:
-            durationOfStay = int(input("""
-    How many nights would you like to stay in for? > """))
-            price = CalculatePrice(roomData,durationOfStay,category,numberOfGuests) 
-            print(f"\nYour Total Price for the rooms would be: {price}\n")
-        else:
-            print("\n!!!Sorry , Currently we are out of vacancies for the entered room!!!\n")
-    
-    UpdateData(room_details,numberOfGuests,category,roomData,id=id)
-    CreateSummary(roomData)
+    elif service == "2":
+        # CHECKING OUT the customer
 
+        print(f"\n{stars}\nLets Begin the Checkout Process\n{stars}")
+        CheckService(roomData,id=2)
+        print(f"\n{stars}\n")
 
-# while not quit:
+    elif service == 'q' or service == "quit":
+        #Ending the process 
 
-service = input("Enter 1 to make a new Reservation, 2 to Check out or 'q' to quit , 's' to see rooms available : ")
+        quit = True
 
-if service == "1":
-    CheckService(id=1)
-elif service == "2":
-    CheckService(id=2)
-elif service == 'q' or service == "quit":
-    pass
-elif service == 's':
-    CreateSummary(roomData)
-else:
-    print("\n!!! Invalid Input !!! Try Again !!!\n")
+    elif service == 's':
+        # Returning list of rooms available
+
+        CreateSummary(roomData)
+
+    else:
+        print("\n!!! Invalid Input !!! Try Again !!!\n")
+
+    if not quit:
+        # If the user wants to continue with services can continue by typing 'y'
+        if (input("Do you want to continue with our services? Enter 'y' to continue otherwise enter: ").lower()) != 'y':
+            quit=True
 
 UpdateTextFile(roomData,file)
+CreateSummary(roomData)
+
+print(f"{hash}\n !!GOODBYE!!\n{hash}")
