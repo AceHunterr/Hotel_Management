@@ -1,6 +1,8 @@
-from data import LoadDetails,enhance_room_details
+from data import LoadDetails
+from manager import CheckAvailability,CalculatePrice,CreateSummary
 
 roomData = LoadDetails('room_details.txt')
+
 
 category = int(input("""
     Enter 1 for Wonderful,
@@ -15,37 +17,14 @@ category = int(input("""
 numberOfGuests = int(input("""
     How many guests will stay in the room? > """))
 
-def CheckAvailability(roomData,category,numberOfGuests):
-    room_details = roomData[category]
-    room_details = enhance_room_details(room_details)
-    
-    num_rooms = room_details[1]
-    capacity = room_details[2]
-    rooms_occupied = room_details[6]
-    vacant_rooms = num_rooms-rooms_occupied
-    vacant_capacity = vacant_rooms*capacity
-
-    # print(room_details)
-    # print(vacant_capacity)
-
-    if vacant_capacity >=numberOfGuests:
-        return True
-    else:
-        return False
-
-
-# def CalculatePrice(roomData,durationOfStay,roomIndex):
-#     room_details = roomData[roomIndex]
-#     room_details = enhance_room_details(room_details)
-
-
+durationOfStay = int(input("""
+    How many nights would you like to stay in for? > 
+"""))
 
 is_available = CheckAvailability(roomData,category,numberOfGuests)
-# if is_available:
-#     CalculatePrice()
+if is_available:
+    print(CalculatePrice(roomData,durationOfStay,category,numberOfGuests))
 
+print(CreateSummary(roomData))
 
-# print(CheckAvailability(roomData,category,numberOfGuests))
-
-# print(type(choice))
-
+# print(roomData)

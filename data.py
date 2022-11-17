@@ -8,3 +8,6 @@ def LoadDetails(csv_file):
 
 def enhance_room_details(list):
     return [int(item) if list.index(item)!=0 else item for item in list]
+
+def to_string_room_details(list):
+    return [str(item) for item in list]
