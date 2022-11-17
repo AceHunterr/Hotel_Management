@@ -1,3 +1,4 @@
+category_name,num_rooms,capacity,pp_night,pp_week,pp_month,num_rooms_occupied
 "Wonderful",20,2,1200,8000,30000,2
 "Marvelous",18,2,1500,9000,35000,2
 "Spectacular",16,3,1600,10000,40000,2

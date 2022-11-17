@@ -1,9 +1,10 @@
 import csv
 
+def LoadDetails(csv_file):
+    with open(csv_file, 'r') as file:
+        readCSV = csv.reader(file,delimiter=',')
+        rooms_data_list = [row for row in readCSV]
+        return rooms_data_list
 
-with open('room_details.txt', 'r') as file:
-    readCSV = csv.reader(file,delimiter=',')
-    print(readCSV)
-    
-    rooms_data_list = [row for row in readCSV]
-    print(rooms_data_list)
+def enhance_room_details(list):
+    return [int(item) if list.index(item)!=0 else item for item in list]
