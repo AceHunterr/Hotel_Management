@@ -1,4 +1,3 @@
-import art
 import csv
 
 ############### DATA HANDLING ######################### 
@@ -36,7 +35,7 @@ def UpdateTextFile(roomData,file):
 ############### HOTEL MANAGER FUNCTIONALITY ######################### 
 
 import math
-from data import enhance_room_details,to_string_room_details        
+   
 
 dash =  "------------------------------------------------"
          
@@ -192,7 +191,7 @@ quit = False
 stars = "***********************"
 hash = "#######################"
 
-art.tprint("FANCY   HOTEL")
+print("\nFANCY   HOTEL")
 print("\nWelcome to Fancy Hotel... Please select from the following services\n")
 
 while not quit:
